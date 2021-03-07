@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PixelTrice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<br><br>
+<h1 class="text-center">Spring Boot Gallery Application</h1><br><br>
+<div class="contact py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+
+        <!--			"/media/saveImageDetails"-->
+        <form th:action="@{/signup}" th:object="${user}" method="post">
+            <div class="contact-grids1 w3agile-6">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">First Name</label>
+                        <input type="text" class="form-control" placeholder="First Name" th:field="*{firstName}" name="First Name" required="required">
+                        <p id="error_name"></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Last Name</label>
+                        <input type="text" class="form-control" placeholder="Last Name" th:field="*{lastName}"  name="Last Name" required="required">
+                        <p id="error_name"></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Email</label>
+                        <input type="text" class="form-control" placeholder="Email" name="Email" th:field="*{email}" required="required">
+                        <p th:text="${invalid}" style="color: #ff0000"></p>
+                        <p id="error_name"></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Password" name="password" th:field="*{password}" required="required">
+                        <p id="error_name"></p>
+                    </div>
+                </div>
+
+                <div class="right-w3l col-md-6">
+                    <input type="submit" class="btn btn-primary btn-customized" value="Sign Up">
+                    <br><br>
+                </div>
+<!--                <a href="/media/show" style="float:left;" class="btn btn-success text-right">Show All</a>-->
+            </div>
+            <br>
+            <div id="success" class="text-center" style="color:green;"></div>
+
+            <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                <span>Already have an account ? <a th:href="@{/login}">Log In</a></span>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

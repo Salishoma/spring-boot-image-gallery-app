@@ -1,13 +1,10 @@
 package com.pixeltrice.springbootimagegalleryapp.repository;
 
+import com.pixeltrice.springbootimagegalleryapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pixeltrice.springbootimagegalleryapp.model.ImageGallery;
-
-
 @Repository
-public interface ImageGalleryRepository extends JpaRepository<ImageGallery, Long>{
-
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByEmail(String email);
 }
-

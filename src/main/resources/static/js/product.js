@@ -3,7 +3,7 @@
     $("#submit").on("click", function() {
     	$("#submit").prop("disabled", true);
     	var name = $("#name").val();
-        var file = $("#image").val(); 
+        var file = $("#media").val();
         var price = $("#price").val();
         var description = $("#description").val();
         var form = $("#form").serialize();
@@ -17,7 +17,7 @@
         	$("#submit").prop("disabled", false);
             $('#loader').hide();
             $("#name").css("border-color", "red");
-            $("#image").css("border-color", "red");
+            $("#media").css("border-color", "red");
             $("#price").css("border-color", "red");
             $("#description").css("border-color", "red");
             $("#error_name").html("Please fill the required field.");
@@ -26,7 +26,7 @@
             $("#error_description").html("Please fill the required field.");
         } else {
             $("#name").css("border-color", "");
-            $("#image").css("border-color", "");
+            $("#media").css("border-color", "");
             $("#price").css("border-color", "");
             $("#description").css("border-color", "");
             $('#error_name').css('opacity', 0);
@@ -37,7 +37,7 @@
                         type: 'POST',
                         enctype: 'multipart/form-data',
                         data: data,
-                        url: "/image/saveImageDetails", 
+                        url: "/media/saveImageDetails",
                         processData: false,
                         contentType: false,
                         cache: false,

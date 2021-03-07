@@ -13,12 +13,12 @@
 </head>
 <body>
 <br><br>
-<h1 class="text-center">Spring Boot Image Gallery Application</h1><br><br>
+<h1 class="text-center">Spring Boot Gallery Application</h1><br><br>
 <div class="contact py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 
-<!--			"/image/saveImageDetails"-->
-			<form th:action="@{/image/saveImageDetails}" th:object="${imageGallery}" method="post">
+<!--			"/media/saveImageDetails"-->
+			<form th:action="@{/media/save-media-details}" th:object="${mediaGallery}" method="post">
 				<div class="contact-grids1 w3agile-6">
 					<div class="row">
 						<div class="col-md-6 col-sm-6 contact-form1 form-group">
@@ -32,8 +32,8 @@
 							<p id="error_description"></p>
 						</div>
 						<div class="col-md-6 col-sm-6 contact-form1 form-group">
-							<label class="col-form-label">Image</label>
-							<input type="text" class="form-control" placeholder="" name="image" th:field="*{image}" required="required">
+							<label class="col-form-label">Media</label>
+							<input type="text" class="form-control" placeholder="" name="media" th:field="*{media}" required="required">
 							<p id="error_file"></p>
 						</div>
 						<div class="col-md-6 col-sm-6 contact-form1 form-group">
@@ -47,9 +47,13 @@
 						<input type="submit" class="btn btn-primary btn-customized" value="Submit">
 						<br><br>
 					</div>
-					<a href="/image/show" style="float:left;" class="btn btn-success text-right">Show All</a>
+<!--					<iframe width="853" height="480" th:src="${media}" frameborder="0"-->
+<!--							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
 				</div>
 				<br>
+				<div>
+					<a th:href="@{/media}" style="float:left;" class="btn btn-success text-right">Home Page</a>
+				</div>
 				<div id="success" class="text-center" style="color:green;"></div>
 			</form>
 

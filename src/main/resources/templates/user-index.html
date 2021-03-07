@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PixelTrice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<br><br>
+<h1 class="text-center">Spring Boot Gallery Application</h1><br><br>
+<div class="contact py-sm-5 py-4">
+    <div class="container py-xl-4 py-lg-2">
+
+        <!--			"/media/saveImageDetails"-->
+        <form th:action="@{/media/{userid}/save-media-details(userid=${userid})}" th:object="${mediaGallery}" method="post">
+            <div class="contact-grids1 w3agile-6">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Name</label>
+                        <input type="text" class="form-control" placeholder="Product Name" th:field="*{name}" name="name" required="required">
+                        <p id="error_name"></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Description</label>
+                        <textarea class="form-control" placeholder="Product Description" th:field="*{description}" rows="3" cols="45" name="description" required="required"></textarea>
+                        <p id="error_description"></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Media</label>
+                        <input type="text" class="form-control" placeholder="" name="media" th:field="*{media}" required="required">
+                        <p id="error_file"></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 contact-form1 form-group">
+                        <label class="col-form-label">Price</label>
+                        <input type="text" class="form-control" placeholder="Price" name="price" th:field="*{price}" required="required">
+                        <p id="error_price"></p>
+                    </div>
+                </div>
+
+                <div class="right-w3l col-md-6">
+                    <input type="submit" class="btn btn-primary btn-customized" value="Submit">
+                    <br><br>
+                </div>
+                <!--					<iframe width="853" height="480" th:src="${media}" frameborder="0"-->
+                <!--							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+            </div>
+            <br>
+            <div>
+                <a th:href="@{/media/{userid}(userid=${userid})}" style="float:left;" class="btn btn-success text-right">User Galleries Page</a>
+            </div>
+            <div id="success" class="text-center" style="color:green;"></div>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
