@@ -8,11 +8,7 @@ import com.pixeltrice.springbootimagegalleryapp.model.MediaGallery;
 import com.pixeltrice.springbootimagegalleryapp.model.User;
 import com.pixeltrice.springbootimagegalleryapp.service.MediaGalleryService;
 import com.pixeltrice.springbootimagegalleryapp.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,32 +28,43 @@ public class MediaGalleryController {
 		this.userService = userService;
 	}
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	@GetMapping( "/media/add")
+	public String displayMediaFormAdmin(Model model, HttpSession session){
+		Object adminObj = session.getAttribute("admin");
+		return displayMediaForm(0, model, adminObj, "");
+	}
 
 	@GetMapping( "/media/{userid}/add")
-	public String displayUserMediaForm(@PathVariable("userid") long userId, Model model, HttpSession session){
+	public String displayMediaFormUser(@PathVariable("userid") long userId, Model model, HttpSession session){
 
 		Object userObj = session.getAttribute("user");
-		if (userObj == null) return "redirect:/login";
+		return displayMediaForm(userId, model, userObj, "user");
+	}
+
+	public String displayMediaForm(long userId, Model model, Object obj, String user){
+		if (obj == null) return "redirect:/login";
 
 		model.addAttribute("mediaGallery", new MediaGallery());
-		model.addAttribute("userid", userId);
-		return "user-index";
+		if(userId != 0) {
+			model.addAttribute("userid", userId);
+		}
+		return user + "Index";
 	}
 
 	@PostMapping("/media/save-media-details")
 	public String createMediaAdmin(@ModelAttribute("mediaGallery") MediaGallery mediaGallery, HttpSession session) {
-		return createMedia(0, mediaGallery, session);
+		Object adminObj = session.getAttribute("admin");
+		return createMedia(0, mediaGallery, adminObj);
 	}
 
 	@PostMapping("/media/{userid}/save-media-details")
 	public String createMediaUser(@PathVariable("userid") long userId, @ModelAttribute("mediaGallery") MediaGallery mediaGallery, HttpSession session) {
-		return createMedia(userId, mediaGallery, session);
+		Object userObj = session.getAttribute("user");
+		return createMedia(userId, mediaGallery, userObj);
 	}
 
-	private String createMedia(long userId, MediaGallery mediaGallery, HttpSession session) {
-		Object userObj = session.getAttribute("user");
-		if (userObj == null) return "redirect:/login";
+	private String createMedia(long userId, MediaGallery mediaGallery, Object obj) {
+		if (obj == null) return "redirect:/login";
 		Date createDate = new Date();
 		mediaGallery.setCreateDate(createDate);
 		mediaGalleryService.saveImage(mediaGallery);
@@ -67,7 +74,6 @@ public class MediaGalleryController {
 			userMediaList.add(mediaGallery);
 			user.setMediaGalleries(userMediaList);
 			userService.createUser(user);
-			log.info("HttpStatus===" + new ResponseEntity<>(HttpStatus.OK));
 			return "redirect:/media/" + userId;
 		}
 		return "redirect:/media/";
@@ -86,7 +92,8 @@ public class MediaGalleryController {
 
 	private String showImage(long userId, Long id, Model model, HttpSession session, String str) {
 		Object userObj = session.getAttribute("user");
-		if (userObj == null) return "redirect:/login";
+		Object adminObj = session.getAttribute("admin");
+		if (userObj == null && adminObj == null) return "redirect:/login";
 		Optional<MediaGallery> imageGallery = mediaGalleryService.getMediaById(id);
 		String url = imageGallery.get().getMedia();
 		model.addAttribute("media", url);
@@ -100,23 +107,38 @@ public class MediaGalleryController {
 	public String showMediaDetailsUser(@PathVariable("userId") Long userId, @PathVariable("id") Long id, Model model, HttpSession session) {
 
 		Object userObj = session.getAttribute("user");
-		if (userObj == null) return "redirect:/login";
+		return showMediaDetails(userId, id, model, userObj, "user");
+	}
+
+	@GetMapping("/media/media-details/{id}")
+	public String showMediaDetailsAdmin(@PathVariable("id") Long id, Model model, HttpSession session) {
+
+		Object adminObj = session.getAttribute("admin");
+		return showMediaDetails(0L, id, model, adminObj, "");
+	}
+
+
+	public String showMediaDetails(Long userId, Long id, Model model, Object obj, String str) {
+		if (obj == null) return "redirect:/login";
 		try {
-			log.info("Id :: " + id);
 			if (id != 0) {
 				MediaGallery mediaGallery = mediaGalleryService.getMediaById(id).orElse(null);
 
 				assert mediaGallery != null;
 				model.addAttribute("mediaGallery", mediaGallery);
-				model.addAttribute("userid", userId);
-				return "user-media-details";
+				if(userId != 0){
+					model.addAttribute("userid", userId);
+				}
+				return str + "MediaDetails";
 			}
-		return "redirect:/media/add";
+			return "redirect:/media/add";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/media/add";
-		}	
+		}
 	}
+
+
 
 	@GetMapping("/media")
 	public String displayMediaAdmin(Model model, HttpSession session) {
@@ -143,19 +165,19 @@ public class MediaGalleryController {
 
 	@RequestMapping("/delete-media/{id}")
 	public String deleteMediaAdmin(@PathVariable(value = "id") long id, HttpSession session) {
-		return deleteMedia(0L, id, session);
+		return deleteMedia(0L, id, session, "admin");
 	}
 
 	@RequestMapping("/delete-media/{userId}/{id}")
 	public String deleterMediaUser(@PathVariable(value = "userId") long userId, @PathVariable(value = "id") long id, HttpSession session) {
-		return deleteMedia(userId, id, session);
+		return deleteMedia(userId, id, session, "user");
 	}
 
-	private String deleteMedia(long userId, long id, HttpSession session) {
-		Object userObj = session.getAttribute("user");
-		if (userObj == null) return "redirect:/login";
+	private String deleteMedia(long userId, long id, HttpSession session, String str) {
+		Object obj = session.getAttribute(str);
+		if (obj == null) return "redirect:/login";
 
 		mediaGalleryService.deleteMedia(id);
-		return "redirect:/media/" + userId;
+		return userId == 0 ?  "redirect:/media/" : "redirect:/media/" + userId;
 	}
 }
