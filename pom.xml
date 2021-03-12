@@ -52,7 +52,91 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security.oauth.boot</groupId>-->
+<!--			<artifactId>spring-security-oauth2-autoconfigure</artifactId>-->
+<!--			<version>2.1.8.RELEASE</version>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-oauth2-jose</artifactId>-->
+<!--		</dependency>-->
+		<!-- Spring Security -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-core</artifactId>-->
+<!--			<version>3.2.0.RELEASE</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-config</artifactId>-->
+<!--			<version>3.2.0.RELEASE</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-taglibs</artifactId>-->
+<!--			<version>3.2.0.RELEASE</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-web</artifactId>-->
+<!--			<version>3.2.0.RELEASE</version>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; Use Apache HttpClient as HTTP Client &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.httpcomponents</groupId>-->
+<!--			<artifactId>httpclient</artifactId>-->
+<!--			<version>4.3.2</version>-->
+<!--		</dependency>-->
+
+		<!-- Spring Social -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-config</artifactId>-->
+<!--			<version>1.1.0.RELEASE</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-core</artifactId>-->
+<!--			<version>1.1.0.RELEASE</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-security</artifactId>-->
+<!--			<version>1.1.0.RELEASE</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-web</artifactId>-->
+<!--			<version>1.1.0.RELEASE</version>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; Spring Social Facebook &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-facebook</artifactId>-->
+<!--			<version>1.1.0.RELEASE</version>-->
+<!--		</dependency>-->
+
+<!--		&lt;!&ndash; Spring Social Twitter &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-twitter</artifactId>-->
+<!--			<version>1.1.0.RELEASE</version>-->
+<!--		</dependency>-->
+
+	</dependencies>
 
 	<build>
 		<plugins>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <title>PixelTrice</title>
   <meta charset="utf-8">
@@ -15,9 +17,12 @@
 </h1>
 <br><br>
 
-<div>
-    <a th:href="@{/logout}" class="btn btn-danger btn-customized">logout</a>
-</div>
+<!--<div>-->
+<!--    <a th:href="@{/logout}" class="btn btn-danger btn-customized">logout</a>-->
+<!--</div>-->
+<form th:action="@{/logout}" class="btn btn-danger btn-customized" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 <table id="filter" class="table table-striped table-bordered text-center">
         <thead>
             <tr>

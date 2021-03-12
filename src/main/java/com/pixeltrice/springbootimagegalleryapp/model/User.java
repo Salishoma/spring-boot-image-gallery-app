@@ -20,4 +20,8 @@ public class User {
 
     @OneToMany
     private List<MediaGallery> mediaGalleries;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="auth_provider")
+    private AuthenticationProvider authenticationProvider;
 }

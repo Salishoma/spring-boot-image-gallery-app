@@ -25,18 +25,18 @@ public class AuthController {
         this.adminService = adminService;
     }
 
-    @GetMapping(path ={ "/", "/signup"})
+    @GetMapping( "/signup")
     public String signUpForm(Model model){
         User user = new User();
         model.addAttribute("user", user);
-        return "sign-up";
+        return "signup";
     }
 
     @PostMapping("/signup")
     public String signUp(@ModelAttribute("user") User user, Model model, HttpSession session){
         if(userService.hasAccount(user)){
             model.addAttribute("invalid", "User already exists");
-            return "sign-up";
+            return "signup";
         }
         User newUser = userService.createUser(user);
         session.setAttribute("user", user);
@@ -49,8 +49,15 @@ public class AuthController {
         return "login";
     }
 
+//    @GetMapping("/")
+//    public String enterForm(Model model){
+////        model.addAttribute("user", new User());
+//        return "Media";
+//    }
+
     @PostMapping("/login")
     public String login(@ModelAttribute("user") User user, Admin admin, Model model, HttpSession session){
+
 
         if(user.getEmail().endsWith("@admin.com")){
             admin.setEmail(user.getEmail());
